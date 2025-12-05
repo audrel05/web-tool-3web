@@ -1,18 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Sketch</title>
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-  </head>
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-8 flex flex-col items-center">
+
+  <!-- DÉBUT DE LA SECTION HTML (index.html logique) -->
+  <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Carrousel de Mots Plat 2D Interactif</h1>
+
+  <!-- Conteneur du Canvas P5.js -->
+  <div id="p5-canvas"></div>
+
+  <!-- Interface Utilisateur (DOM) -->
+  <div class="w-full max-w-4xl bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+      <h2 class="text-xl font-semibold text-gray-700">Contrôles du Carrousel</h2>
+
+      <!-- Sélection de la Typographie -->
+      <div class="w-full sm:w-auto">
+        <label for="input-typo" class="block text-sm font-medium text-gray-700">Typographie (Mot Sélectionné)</label>
+        <select id="input-typo"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-2 border bg-white">
+          <option value="Inter">Inter (par défaut)</option>
+          <option value="Montserrat">Montserrat</option>
+          <option value="Roboto">Roboto</option>
+        </select>
+      </div>
+
+      <!-- Contrôles Manuels (Flèches) -->
+      <div class="w-full sm:w-auto">
+        <label class="block text-sm font-medium text-gray-700">Défilement Manuel</label>
+        <div class="flex gap-2 mt-1">
+          <button id="btn-left"
+            class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-lg hover:bg-gray-400 active:bg-gray-500 transition duration-150 ease-in-out">
+            &lt; Gauche
+          </button>
+          <button id="btn-right"
+            class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-lg hover:bg-gray-400 active:bg-gray-500 transition duration-150 ease-in-out">
+            Droite &gt;
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <h3 class="text-lg font-medium text-gray-700 mb-3">Ajouter / Modifier Mot Sélectionné</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+
+      <!-- Input Texte (Uniquement pour NOUVEAU MOT) -->
+      <div>
+        <label for="input-texte" class="block text-sm font-medium text-gray-700">Texte (Nouveau Mot)</label>
+        <input type="text" id="input-texte" value="NOUVEAU"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-2 border">
+      </div>
+
+      <!-- Input Taille -->
+      <div>
+        <label for="input-taille" class="block text-sm font-medium text-gray-700">Taille du Texte (Sélectionné)</label>
+        <input type="range" id="input-taille" min="10" max="80" value="40"
+          class="mt-3 block w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg">
+        <span id="taille-value" class="text-xs text-gray-500 block text-center mt-1">40</span>
+      </div>
+
+      <!-- Input Couleur -->
+      <div>
+        <label for="input-couleur" class="block text-sm font-medium text-gray-700">Couleur (Sélectionné)</label>
+        <input type="color" id="input-couleur" value="#FFFFFF"
+          class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm p-1 cursor-pointer">
+      </div>
+
+      <!-- Bouton Ajouter -->
+      <div>
+        <button id="btn-ajouter"
+          class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition duration-150 ease-in-out">
+          Ajouter Mot
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sketch.js"></script>
+</body>
+
 </html>

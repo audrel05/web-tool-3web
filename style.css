@@ -1,8 +1,31 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
+   /* Configuration de la police Inter par défaut */
+   :root {
+     font-family: 'Inter', sans-serif;
+   }
 
-canvas {
-  display: block;
-}
+   /* Importation des polices Google pour le DOM et le P5.js (NÉCESSAIRE) */
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@500&family=Inter:wght@400;700&display=swap');
+
+   /* Style du conteneur du Canvas P5.js */
+   #p5-canvas {
+     border-radius: 1rem;
+     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+     margin-bottom: 2rem;
+     width: 800px;
+     height: 600px;
+     overflow: hidden;
+     cursor: default;
+     /* Retirer le curseur de grab */
+   }
+
+   /* Style personnalisé pour le curseur du range input */
+   input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+     appearance: none;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     background: #4f46e5;
+     cursor: pointer;
+     box_shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+   }
