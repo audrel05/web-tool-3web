@@ -15,16 +15,25 @@ Cette approche vise à questionner la manière dont la forme influence le sens e
 
 
 ## Descritpion de l'outil
-L’outil prend la forme d’une page web interactive.
-Sur la page, un carrousel de mots défile continuellement.
-Chaque mot possède un style généré aléatoirement :
-Typographie choisie parmi une sélection de polices variées,
-Taille et couleur aléatoires, Effets visuels appliqués (rotation, étirement, espacement, animation…).
-Lorsque l’utilisateur clique sur un mot, un panneau de personnalisation s’ouvre :
-il peut alors modifier ses paramètres (police, couleur, taille, effet) et visualiser les changements en temps réel.
-Chaque mot devient ainsi une composition typographique personnalisable, que l’on peut transformer ou régénérer à volonté.
-L’expérience repose sur la création aléatoire et l’interaction directe, mêlant hasard et intention.
-L’utilisateur n’est pas spectateur, mais acteur du processus visuel, capable de manipuler la forme du langage.
+L'outil se présente sous la forme d'une interface web épurée, alliant un fond Blanc Cassé (#f8f7f2) et un écran de rendu Bleu Nuit (#132440).
+
+Fonctionnalités Clés :
+
+Carrousel Infini 2D : Un défilement fluide et perpétuel de mots.
+
+Interaction Directe : Cliquez sur n'importe quel mot dans l'écran pour le sélectionner. Un indicateur rouge (surlignage) apparaît pour confirmer la sélection.
+
+Édition en Temps Réel : Une fois un mot sélectionné, vous pouvez modifier instantanément :
+
+La Typographie : Choix parmi 10 polices expressives (Tilt Warp, Tourney, Rubik Glitch, etc.).
+
+La Taille : Via un slider (de 10 à 150px).
+
+La Couleur : Via un sélecteur avec aperçu dynamique sur les boutons de l'interface.
+
+Navigation Manuelle : Des boutons "Gauche" et "Droite" permettent de prendre le contrôle du défilement.
+
+Ajout Dynamique : Créez de nouveaux mots qui s'intègrent immédiatement dans la boucle du carrousel.
 
 ## Snippets
 - Interface : slider pour modifier la taille d’un texte
@@ -113,3 +122,15 @@ panel.innerHTML = `
     <button id="closePanel">Fermer</button>
   `;
   ```
+
+## Typographies Intégrées
+
+Le projet utilise une sélection de polices Google Fonts pour offrir des styles contrastés :
+
+Modernes : Inter, Montserrat
+
+Expressives : Tilt Warp, Londrina Sketch
+
+Futuristes : Tourney, Orbitron
+
+Rétro / Glitch : VT323, Press Start 2P, Rubik Glitch
