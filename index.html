@@ -1,96 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrousel de Mots Interactif - P5.js</title>
 
-  <title>Sketch</title>
-
-  <link rel="stylesheet" type="text/css" href="style.css">
-
-  <script src="libraries/p5.min.js"></script>
-  <script src="libraries/p5.sound.min.js"></script>
+  <!-- Bibliothèques -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen p-8 flex flex-col items-center">
+<body>
 
-  <!-- DÉBUT DE LA SECTION HTML (index.html logique) -->
-  <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Carrousel de Mots Plat 2D Interactif</h1>
+  <!-- Préchargement invisible des polices -->
+  <div class="font-preloader">
+    <span style="font-family: 'Inter';">.</span>
+    <span style="font-family: 'Montserrat';">.</span>
+    <span style="font-family: 'Tilt Warp';">.</span>
+    <span style="font-family: 'Raleway Dots';">.</span>
+    <span style="font-family: 'Tourney';">.</span>
+    <span style="font-family: 'VT323';">.</span>
+    <span style="font-family: 'Orbitron';">.</span>
+    <span style="font-family: 'Rubik Glitch';">.</span>
+    <span style="font-family: 'Press Start 2P';">.</span>
+    <span style="font-family: 'Londrina Sketch';">.</span>
+  </div>
 
-  <!-- Conteneur du Canvas P5.js -->
+  <h1 class="text-3xl font-black mb-6 uppercase tracking-widest text-blue">
+    Carrousel de Mots Interactif
+  </h1>
+
+  <!-- Canvas -->
   <div id="p5-canvas"></div>
 
-  <!-- Interface Utilisateur (DOM) -->
-  <div class="w-full max-w-4xl bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+  <!-- Panneau de contrôle -->
+  <div class="controls-card">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 pb-6 border-b border-gray-100">
 
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-      <h2 class="text-xl font-semibold text-gray-700">Contrôles du Carrousel</h2>
-
-      <!-- Sélection de la Typographie -->
-      <div class="w-full sm:w-auto">
-        <label for="input-typo" class="block text-sm font-medium text-gray-700">Typographie (Mot Sélectionné)</label>
-        <select id="input-typo"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-2 border bg-white">
-          <option value="Inter">Inter (par défaut)</option>
+      <div>
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">
+          Style d'écriture
+        </label>
+        <select id="input-typo" class="w-full p-2 bg-gray-50 border rounded-md font-semibold text-sm">
+          <option value="Inter">Inter</option>
           <option value="Montserrat">Montserrat</option>
-          <option value="Roboto">Roboto</option>
+          <option value="Tilt Warp">Tilt Warp</option>
+          <option value="Raleway Dots">Raleway Dots</option>
+          <option value="Tourney">Tourney</option>
+          <option value="VT323">VT323</option>
+          <option value="Orbitron">Orbitron</option>
+          <option value="Rubik Glitch">Rubik Glitch</option>
+          <option value="Press Start 2P">Press Start 2P</option>
+          <option value="Londrina Sketch">Londrina Sketch</option>
         </select>
       </div>
 
-      <!-- Contrôles Manuels (Flèches) -->
-      <div class="w-full sm:w-auto">
-        <label class="block text-sm font-medium text-gray-700">Défilement Manuel</label>
-        <div class="flex gap-2 mt-1">
-          <button id="btn-left"
-            class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-lg hover:bg-gray-400 active:bg-gray-500 transition duration-150 ease-in-out">
-            &lt; Gauche
-          </button>
-          <button id="btn-right"
-            class="px-4 py-2 bg-gray-300 text-gray-800 font-bold rounded-lg hover:bg-gray-400 active:bg-gray-500 transition duration-150 ease-in-out">
-            Droite &gt;
-          </button>
+      <div class="flex flex-col justify-end">
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">
+          Navigation Manuelle
+        </label>
+        <div class="flex gap-2">
+          <button id="btn-left" class="flex-1 py-2 bg-indigo-50 rounded-md">&larr; Gauche</button>
+          <button id="btn-right" class="flex-1 py-2 bg-indigo-50 rounded-md">Droite &rarr;</button>
         </div>
       </div>
 
+      <div class="flex items-center text-xs text-gray-400 italic text-center">
+        Cliquez sur un mot pour le modifier
+      </div>
     </div>
-    <h3 class="text-lg font-medium text-gray-700 mb-3">Ajouter / Modifier Mot Sélectionné</h3>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
 
-      <!-- Input Texte (Uniquement pour NOUVEAU MOT) -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
       <div>
-        <label for="input-texte" class="block text-sm font-medium text-gray-700">Texte (Nouveau Mot)</label>
-        <input type="text" id="input-texte" value="NOUVEAU"
-          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary p-2 border">
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Texte</label>
+        <input id="input-texte" value="NOUVEAU" class="w-full p-2 border rounded-md">
       </div>
 
-      <!-- Input Taille -->
       <div>
-        <label for="input-taille" class="block text-sm font-medium text-gray-700">Taille du Texte (Sélectionné)</label>
-        <input type="range" id="input-taille" min="10" max="80" value="40"
-          class="mt-3 block w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg">
-        <span id="taille-value" class="text-xs text-gray-500 block text-center mt-1">40</span>
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">
+          Taille : <span id="taille-value">60</span>
+        </label>
+        <input id="input-taille" type="range" min="10" max="150" value="60">
       </div>
 
-      <!-- Input Couleur -->
       <div>
-        <label for="input-couleur" class="block text-sm font-medium text-gray-700">Couleur (Sélectionné)</label>
-        <input type="color" id="input-couleur" value="#FFFFFF"
-          class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm p-1 cursor-pointer">
+        <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Couleur</label>
+        <input id="input-couleur" type="color" value="#ffffff">
       </div>
 
-      <!-- Bouton Ajouter -->
       <div>
-        <button id="btn-ajouter"
-          class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition duration-150 ease-in-out">
-          Ajouter Mot
+        <button id="btn-ajouter" class="w-full py-2 bg-indigo-600 text-white font-bold rounded-md" style="background-color:#0f172a">
+          Ajouter un Mot
         </button>
       </div>
     </div>
   </div>
 
+  <!-- JS -->
   <script src="sketch.js"></script>
 </body>
 
