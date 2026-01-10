@@ -40,7 +40,6 @@ body {
   margin-bottom: 2.5rem;
   background: var(--midnight-blue);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  /* Retour aux dimensions d'origine */
   width: 800px;
   max-width: 95vw;
   height: 600px;

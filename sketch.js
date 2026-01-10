@@ -140,11 +140,10 @@ function ajouterOuModifier() {
 const btnAjouter = document.getElementById('btn-ajouter');
 
 btnAjouter.addEventListener('click', () => {
-  // Couleur flash
   const originalColor = btnAjouter.style.backgroundColor;
-  btnAjouter.style.backgroundColor = "#90AB8B"; // couleur au clic, par ex. vert
+  btnAjouter.style.backgroundColor = "#90AB8B";
   setTimeout(() => {
-    btnAjouter.style.backgroundColor = originalColor; // retour à la couleur normale
+    btnAjouter.style.backgroundColor = originalColor; 
   }, 150);
 });
 
